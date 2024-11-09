@@ -20,6 +20,6 @@ export default [
       'prettier/prettier': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
-    ignores: ['dist', 'node_modules'], // Ignoring dist and node_modules directories
+    ignores: ['dist', 'node_modules'],
   },
 ];

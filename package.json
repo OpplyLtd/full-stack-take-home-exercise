@@ -2,8 +2,7 @@
   "name": "full-stack-take-home-exercise",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "type": "module",
+  "main": "src/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest",
