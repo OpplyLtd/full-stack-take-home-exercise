@@ -22,3 +22,11 @@ $ npm test
 $ npm run build
 $ npm run start
 ```
+
+## Key changes
+
+- centralized type definitions in `types.ts`
+- discriminated union pattern with literal type narrowing
+- separated data from business logic in `data.ts`
+- added JSDoc descriptions to utility functions
+- leverage automatic type narrowing in main function
