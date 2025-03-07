@@ -3,6 +3,9 @@ import { Order, TestOutput, User } from './types';
 import {
   calculateTotalLengthOfFullNames,
   countNumberOfUniqueCities,
+  processAddresses,
+  processOrders,
+  processUsers,
 } from './utils';
 
 export default function main(): TestOutput {
@@ -19,24 +22,9 @@ export default function main(): TestOutput {
 
   testOutput.countOfDatabaseItems = listOfDatabaseItems.length;
 
-  for (const databaseItem of listOfDatabaseItems) {
-    if (databaseItem.type === 'order') {
-      testOutput.orders.push(databaseItem as Order);
-    }
-
-    if (databaseItem.type === 'address') {
-      if (databaseItem.city != null) {
-        testOutput.addresses.push({
-          id: databaseItem.id,
-          city: databaseItem.city,
-        });
-      }
-    }
-
-    if (databaseItem.type === 'user') {
-      testOutput.users.push(databaseItem as User);
-    }
-  }
+  testOutput.orders = processOrders(listOfDatabaseItems);
+  testOutput.users = processUsers(listOfDatabaseItems);
+  testOutput.addresses = processAddresses(listOfDatabaseItems);
 
   testOutput.totalRevenue = testOutput.orders.reduce(
     (revenue, order): number => {
@@ -54,7 +42,7 @@ export default function main(): TestOutput {
   );
 
   testOutput.allFullNames = testOutput.users.map((user) => {
-    return user.firstName + ' ' + user.lastName;
+    return `${user.firstName} ${user.lastName}`;
   });
 
   return testOutput;

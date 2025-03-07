@@ -36,3 +36,21 @@ export function createOrder({ id, price }: Order): DatabaseItem {
 export function createUser({ id, firstName, lastName }: User): DatabaseItem {
   return { type: DatabaseItemType.USER, id, firstName, lastName };
 }
+
+export function processOrders(items: DatabaseItem[]): Order[] {
+  return items.filter(
+    (item) => item.type === DatabaseItemType.ORDER,
+  ) as Order[];
+}
+
+export function processUsers(items: DatabaseItem[]): User[] {
+  return items.filter((item) => item.type === DatabaseItemType.USER) as User[];
+}
+
+export function processAddresses(items: DatabaseItem[]): Address[] {
+  return items
+    .filter(
+      (item) => item.type === DatabaseItemType.ADDRESS && item.city != null,
+    )
+    .map((item) => ({ id: item.id, city: item.city })) as Address[];
+}
