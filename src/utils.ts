@@ -1,4 +1,4 @@
-import { Address, User } from './index';
+import { Address, User } from './types';
 
 export function countNumberOfUniqueCities(addresses: Address[]): number {
   const cities = addresses.map((address) => {
