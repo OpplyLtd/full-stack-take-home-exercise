@@ -1,4 +1,4 @@
-import { Address, User } from './index';
+import { Address, DatabaseItem, DatabaseItemType, Order, User } from './types';
 
 export function countNumberOfUniqueCities(addresses: Address[]): number {
   const cities = addresses.map((address) => {
@@ -23,4 +23,16 @@ export function calculateTotalLengthOfFullNames(users: User[]): number {
   return foos.reduce((lengthOfFullNames, foo): number => {
     return lengthOfFullNames + foo.length;
   }, 0);
+}
+
+export function createAddress({ id, city }: Address): DatabaseItem {
+  return { type: DatabaseItemType.ADDRESS, id, city };
+}
+
+export function createOrder({ id, price }: Order): DatabaseItem {
+  return { type: DatabaseItemType.ORDER, id, price };
+}
+
+export function createUser({ id, firstName, lastName }: User): DatabaseItem {
+  return { type: DatabaseItemType.USER, id, firstName, lastName };
 }

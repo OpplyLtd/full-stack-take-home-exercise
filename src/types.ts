@@ -1,4 +1,3 @@
-
 export enum DatabaseItemType {
     USER = 'user',
     ORDER = 'order',
