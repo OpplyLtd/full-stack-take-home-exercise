@@ -17,7 +17,7 @@ const orders: DatabaseItem[] = [
   createOrder({ id: 7, price: 900 }),
   createOrder({ id: 8, price: 500 }),
   createOrder({ id: 9, price: 1200 }), //id is same for two of the orders but the price was different
-  createOrder({ id: 9, price: 1300 }),
+  createOrder({ id: 10, price: 1300 }),
 ];
 
 const users: DatabaseItem[] = [
