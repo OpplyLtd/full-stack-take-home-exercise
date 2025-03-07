@@ -2,7 +2,7 @@ import {
   calculateTotalLengthOfFullNames,
   countNumberOfUniqueCities,
 } from './utils';
-import { Order, User, Address, TestOutput } from './types';
+import { TestOutput } from './types';
 import { unorganisedListOfDatabaseItems } from './data';
 
 export default function main(): TestOutput {
@@ -21,22 +21,16 @@ export default function main(): TestOutput {
 
   for (const databaseItem of unorganisedListOfDatabaseItems) {
     if (databaseItem.type === 'order') {
-      testOutput.orders.push(databaseItem as Order);
-    }
-
-    if (databaseItem.type === 'address') {
-      testOutput.addresses.push(databaseItem as Address);
-    }
-
-    if (databaseItem.type === 'user') {
-      testOutput.users.push(databaseItem as User);
+      testOutput.orders.push(databaseItem);
+    } else if (databaseItem.type === 'address') {
+      testOutput.addresses.push(databaseItem);
+    } else if (databaseItem.type === 'user') {
+      testOutput.users.push(databaseItem);
     }
   }
 
   testOutput.totalRevenue = testOutput.orders.reduce(
-    (revenue, order): number => {
-      return revenue + order.price;
-    },
+    (revenue, order): number => revenue + order.price,
     0,
   );
 
@@ -48,9 +42,9 @@ export default function main(): TestOutput {
     testOutput.users,
   );
 
-  testOutput.allFullNames = testOutput.users.map((user) => {
-    return user.firstName + ' ' + user.lastName;
-  });
+  testOutput.allFullNames = testOutput.users.map(
+    (user) => `${user.firstName} ${user.lastName}`,
+  );
 
   return testOutput;
 }
