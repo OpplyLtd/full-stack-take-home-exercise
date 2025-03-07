@@ -4,7 +4,6 @@ import {
   countNumberOfUniqueCities,
 } from './utils';
 
-
 const unorganisedListOfDatabaseItems: DatabaseItem[] = [
   {
     type: 'user',

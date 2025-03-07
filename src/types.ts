@@ -1,6 +1,12 @@
 
+export enum DatabaseItemType {
+    USER = 'user',
+    ORDER = 'order',
+    ADDRESS = 'address',
+  }
+
 export type DatabaseItem = {
-    type: string;
+    type: DatabaseItemType;
     id: number;
     firstName?: string;
     lastName?: string;
