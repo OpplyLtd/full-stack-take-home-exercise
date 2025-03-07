@@ -23,7 +23,7 @@ describe('countNumberOfUniqueCities', () => {
 });
 
 describe('calculateTotalLengthOfFullNames', () => {
-  test('it considers same city if they have extra spaces in between characters', () => {
+  test('it calculates length of all full names including spaces', () => {
     const users: User[] = [
       { id: 1, firstName: 'Dja', lastName: 'Vim', type: 'user' },
       { id: 2, firstName: 'No', lastName: 'Mklsdf', type: 'user' },

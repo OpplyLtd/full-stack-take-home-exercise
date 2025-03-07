@@ -1,26 +1,33 @@
 import { Address, User } from './types';
 
+/**
+ * Counts the number of unique cities from a list of addresses
+ *
+ * @param addresses - Array of address objects
+ * @returns The number of unique cities
+ */
 export function countNumberOfUniqueCities(addresses: Address[]): number {
-  const cities = addresses.map((address) => {
-    return address.city;
-  });
-
-  const trimmedCities = cities.map((city) => {
-    return city.replace(/\s+/g, '');
+  const trimmedCities = addresses.map((address) => {
+    return address.city.replace(/\s+/g, '');
   });
 
   const uniqueCities = new Set(trimmedCities);
   return uniqueCities.size;
 }
 
+/**
+ * Calculates the total length of all users' full names
+ *
+ * @param users - Array of user objects
+ * @returns The total combined length of all full names
+ */
 export function calculateTotalLengthOfFullNames(users: User[]): number {
-  // This variable is holds the list of full names so that
-  // the total length includes the space between first and last names
-  const foos = users.map((user) => {
+  // Generate full names with space between first and last names
+  const fullNames = users.map((user) => {
     return `${user.firstName} ${user.lastName}`;
   });
 
-  return foos.reduce((lengthOfFullNames, foo): number => {
-    return lengthOfFullNames + foo.length;
+  return fullNames.reduce((lengthOfFullNames, fullName): number => {
+    return lengthOfFullNames + fullName.length;
   }, 0);
 }
