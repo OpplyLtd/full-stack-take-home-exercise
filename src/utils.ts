@@ -1,28 +1,22 @@
 import { Address, DatabaseItem, DatabaseItemType, Order, User } from './types';
 
 export function countNumberOfUniqueCities(addresses: Address[]): number {
-  const cities = addresses.map((address) => {
-    return address.city;
-  });
+  const citiesWithoutWhitespace = addresses.map((address) =>
+    address.city.replace(/\s+/g, ''),
+  );
 
-  const trimmedCities = cities.map((city) => {
-    return city.replace(/\s+/g, '');
-  });
-
-  const uniqueCities = new Set(trimmedCities);
+  const uniqueCities = new Set(citiesWithoutWhitespace);
   return uniqueCities.size;
 }
 
 export function calculateTotalLengthOfFullNames(users: User[]): number {
-  // This variable is holds the list of full names so that
-  // the total length includes the space between first and last names
-  const foos = users.map((user) => {
-    return `${user.firstName} ${user.lastName}`;
-  });
+  const totalLength = users.reduce((accumulatedLength, user) => {
+    const fullName = `${user.firstName} ${user.lastName}`;
 
-  return foos.reduce((lengthOfFullNames, foo): number => {
-    return lengthOfFullNames + foo.length;
+    return accumulatedLength + fullName.length;
   }, 0);
+
+  return totalLength;
 }
 
 export function createAddress({ id, city }: Address): DatabaseItem {
