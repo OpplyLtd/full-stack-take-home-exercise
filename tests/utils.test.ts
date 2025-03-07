@@ -1,10 +1,13 @@
-import { DatabaseItemType } from '../src/types';
+import { DatabaseItem, DatabaseItemType } from '../src/types';
 import {
   countNumberOfUniqueCities,
   calculateTotalLengthOfFullNames,
   createAddress,
   createOrder,
   createUser,
+  processAddresses,
+  processOrders,
+  processUsers,
 } from '../src/utils';
 
 describe('countNumberOfUniqueCities', () => {
@@ -96,5 +99,46 @@ describe('DatabaseItem Creation Functions', () => {
     expect(combined[0].type).toBe(DatabaseItemType.ADDRESS);
     expect(combined[3].type).toBe(DatabaseItemType.ORDER);
     expect(combined[5].type).toBe(DatabaseItemType.USER);
+  });
+});
+
+describe('Order, User, and Address Processing', () => {
+  const testItems: DatabaseItem[] = [
+    { type: DatabaseItemType.ORDER, id: 1, price: 1000 },
+    { type: DatabaseItemType.ORDER, id: 2, price: 2000 },
+    { type: DatabaseItemType.ORDER, id: 3, price: 1500 },
+    { type: DatabaseItemType.USER, id: 1, firstName: 'Av', lastName: 'Doi' },
+    { type: DatabaseItemType.USER, id: 2, firstName: 'Uoi', lastName: 'Frwn' },
+    { type: DatabaseItemType.ADDRESS, id: 10, city: 'Wobi' },
+  ];
+
+  it('should process orders correctly', () => {
+    const orders = processOrders(testItems);
+    expect(orders).toEqual(
+      expect.arrayContaining([
+        { type: DatabaseItemType.ORDER, id: 1, price: 1000 },
+      ]),
+    );
+  });
+
+  it('should process users correctly', () => {
+    const users = processUsers(testItems);
+    expect(users).toEqual(
+      expect.arrayContaining([
+        {
+          type: DatabaseItemType.USER,
+          id: 1,
+          firstName: 'Av',
+          lastName: 'Doi',
+        },
+      ]),
+    );
+  });
+
+  it('should process addresses correctly', () => {
+    const addresses = processAddresses(testItems);
+    expect(addresses).toEqual(
+      expect.arrayContaining([{ id: 10, city: 'Wobi' }]),
+    );
   });
 });
